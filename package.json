@@ -1,0 +1,44 @@
+{
+  "name": "webpack-boilerplate",
+  "version": "0.0.1",
+  "description": "A Webpack-based boilerplate project",
+  "keywords": "boilerplate, frontend, javascript, webpack, sass, es6, es2015, stage-0, babel",
+  "author": "Raice Hannay",
+  "license": "GPL-3.0",
+  "scripts": {
+    "build": "node node_modules/webpack/bin/webpack.js -p --config ./webpack.config.babel.js",
+    "hot": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --devtool eval --progress --colors --hot  --config ./webpack-dev.config.babel.js"
+  },
+  "dependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.1",
+    "babel-loader": "^6.2.2",
+    "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.5.1",
+    "babel-runtime": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "exports-loader": "^0.6.2",
+    "expose-loader": "^0.7.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "filesize": "^3.2.1",
+    "image-webpack-loader": "^1.6.3",
+    "imports-loader": "^0.6.5",
+    "json-loader": "^0.5.4",
+    "node-sass": "^3.4.2",
+    "react": "^0.14.7",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.13"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.5.0",
+    "es6-promise": "^3.0.2",
+    "react-hot-loader": "^1.3.0",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
