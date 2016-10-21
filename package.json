@@ -1,9 +1,9 @@
 {
-  "name": "webpack-boilerplate",
+  "name": "js-game",
   "version": "0.0.1",
-  "description": "A Webpack-based boilerplate project",
+  "description": "Simple game to demonstrate knowledge of js",
   "keywords": "boilerplate, frontend, javascript, webpack, sass, es6, es2015, stage-0, babel",
-  "author": "Raice Hannay",
+  "author": "Selena Small",
   "license": "GPL-3.0",
   "scripts": {
     "build": "node node_modules/webpack/bin/webpack.js -p --config ./webpack.config.babel.js",

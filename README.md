@@ -1,3 +1,3 @@
-Webpack project for learning JS
-===============================
-Based off the Webpack frontend boilerplate whic can be found here at https://github.com/voodoocreation/webpack-boilerplate
+JS Game
+=======
+Simple JS game written on the Webpack frontend boilerplate which can be found here at https://github.com/voodoocreation/webpack-boilerplate
