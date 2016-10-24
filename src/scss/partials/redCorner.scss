@@ -1,0 +1,82 @@
+.red-body-parts {
+	position: absolute;
+	display: block;
+}
+
+#red-corner {
+	height: 500px;
+	float: left;
+}
+
+#red-character {
+	border: 1px solid red;
+    height: 500px;
+    width: 50%;
+    float: right;
+    margin-right: 20px;
+}
+
+#red-left-hand {
+	top: 43px;
+    right: -110px;
+}
+
+#red-left-bicep {
+    top: 85px;
+    right: -45px;
+}
+
+#red-left-thigh {
+    top: 205px;
+    right: -20px;
+}
+
+#red-left-leg {
+    top: 305px;
+    right: -50px;
+}
+
+#red-body {
+    top: 120px;
+    right: -10px;
+}
+
+#red-head {
+    top: 0;
+    right: -30px;
+}
+
+#red-right-bicep {
+    top: 90px;
+    right: -30px;
+}
+
+#red-right-hand {
+    top: 82px;
+    right: -105px;
+}
+
+#red-right-thigh {
+    top: 210px;
+    right: 30px;
+}
+
+#red-right-leg {
+    top: 314px;
+    right: 72px;
+}
+
+#life-bar-red {
+	width: 45%;
+	float: left;
+	margin-top: 40px;
+}
+
+#red-life-bar {
+	width: 98%;
+    border: 5px solid #000;
+    height: 20px;
+    border-radius: 50px;
+    float: left;
+    background: red;
+}

@@ -1,0 +1,82 @@
+.blue-body-parts {
+	position: absolute;
+	display: block;
+}
+
+#blue-corner {
+	height: 500px;
+	float: right;
+}
+
+#blue-character {
+	border: 1px solid blue;
+    height: 500px;
+    width: 50%;
+    float: left;
+    margin-left: 20px;
+}
+
+#blue-right-hand {
+    top: 43px;
+    left: -110px;
+}
+
+#blue-right-bicep {
+    top: 85px;
+    left: -45px;
+}
+
+#blue-right-thigh {
+    top: 205px;
+    left: -20px;
+}
+
+#blue-right-leg {
+    top: 305px;
+    left: -54px;
+}
+
+#blue-body {
+    top: 120px;
+    left: -10px;
+}
+
+#blue-head {
+    top: 0;
+    left: -30px;
+}
+
+#blue-left-bicep {
+    top: 90px;
+    left: -30px;
+}
+
+#blue-left-hand {
+    top: 82px;
+    left: -105px;
+}
+
+#blue-left-thigh {
+    top: 210px;
+    left: 30px;
+}
+
+#blue-left-leg {
+    top: 314px;
+    left: 68px;
+}
+
+#life-bar-blue {
+	width: 45%;
+	float: right;
+	margin-top: 40px;
+}
+
+#blue-life-bar {
+	width: 98%;
+    border: 5px solid #000;
+    height: 20px;
+    border-radius: 50px;
+    float: right;
+    background: blue;
+}

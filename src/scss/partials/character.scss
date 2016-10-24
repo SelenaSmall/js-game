@@ -1,7 +1,23 @@
-#red-corner {
-	background: #ff0000;
+.corners {
+	height: 850px;
+	width: 50%;
+	margin: auto;
+	display: inline-block;
+	position: relative;
 }
 
-#blue-corner {
-	background: #0066ff;
+.characters {
+	width: 100%;
+    margin: auto;
+}
+
+.col-grid-6 {
+    width: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.life-bar {
+    width: 80%;
+    margin: auto;
 }
