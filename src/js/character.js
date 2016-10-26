@@ -1,16 +1,32 @@
-import Die from './Die'
+import Attack from './Attack'
+import Defend from './Defend'
 
-class Character {
-	constructor() {
-		this.d20 = new Die(1, 20)
-		// let value = this.d20.roll()
+export default class Character {
+	constructor(name) {
+		this.name = name
+		this.jab = new Attack()
+		this.block = new Defend()
 	}
 
-	characterRoll() {
-		return this.d20.roll()
+	characterName() {
+		return this.name
+	}
+
+	characterAttack() {
+		return this.jab.attackScore()
+	}
+
+	characterDefend() {
+		return "Block " + this.block.defendScore()
 	}
 
 }
+ 
+// let char1 = new Character(prompt("Choose your name: "))
+// let char2 = new Character("Fred")
 
-let char1 = new Character()
-console.log(char1.characterRoll())
+// console.log("Red Corner: " + char1.characterName())
+// console.log("Blue Corner: " + char2.characterName())
+
+
+// console.log(char1.characterName() + " " +char1.characterAttack())

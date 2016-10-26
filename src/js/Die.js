@@ -11,5 +11,4 @@ export default class Die {
 }
 
 // let d6 = new Die(1, 6)
-
 // console.log(d6.roll())

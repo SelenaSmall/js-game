@@ -3,10 +3,125 @@
  * Initialise your modules in this file
  */
 import"../scss/index.scss" 
-import "./Game"
-import "./Die"
-import "./Character"
-import "./Attack"
+import Game from './Game'
+import Die from './Die'
+import Character from './Character'
+import Attack from './Attack'
+
+let player1 = new Character(prompt("Choose your name: "))
+let player2 = new Character("Fred")
+
+console.log("Red Corner: " + player1.characterName() + " vs Blue Corner: " + player2.characterName())
+
+let newGame = new Game()
+newGame.startGame()
+
+
+// console.log(player1.characterName() + " Attack: " + player1.characterAttack())
+// console.log(player2.characterName() + " " + player2.characterDefend())
+
+
+class Fight {
+	constructor() {
+		this.duel = true
+		this.damageThisRound = player1.characterAttack()
+		this.totalDamage = 0
+	}
+
+	fighting() {
+		while(this.duel) {
+			if (this.totalDamage < 30) {	
+				console.log(player1.characterName() + " Attack: " + player1.characterAttack())
+				this.totalDamage += this.damageThisRound
+				
+				if (this.totalDamage < 30) { 
+					console.log(player2.characterName() + " " + player2.characterDefend())
+					console.log(player2.characterName() + " Attack: " + player2.characterAttack())
+					if (player2.characterAttack()) {
+						console.log(player1.characterName() + " " + player1.characterDefend())
+					}
+				}
+
+			} else if (this.totalDamage > 30) {
+				this.youWon()
+			} else{
+				this.youLost()
+			}
+
+		}
+	}
+
+	youWon() {
+		console.log("KO! YOU WON");
+	  	this.duel = false;
+	}
+
+	youLost() {
+		console.log("YOU LOST");
+	    this.duel = false;
+	}	
+
+}
+
+let round1 = new Fight()
+round1.fighting()
+
+
+// var fighting = true
+// var damageThisRound = player1.characterAttack()
+// var totalDamage = 0
+
+
+
+// while (fighting) {	
+// 	if (totalDamage < 10) {	
+// 		console.log(player1.characterName() + " Attack: " + player1.characterAttack())
+// 		totalDamage += damageThisRound
+// 	} else {
+// 		console.log("You Lost")
+// 		fighting = false
+// 	}
+// 	// if (player1.characterAttack()) {
+// 	// 	totalDamage += damageThisRound
+// 	// 	if (totalDamage < 10) {
+// 	// 		console.log(player2.characterName() + " " + player2.characterDefend())
+			
+// 	// 	} else {
+// 	// 		console.log("You Lost")
+// 	// 		fighting = false;
+// 	// 	}
+// 	// } else {
+// 	// 	console.log("Keep Fighting")
+// 	// }
+
+
+// }
+
+
+
+// var damageThisRound = Math.floor(Math.random() * 5 + 1);
+// var totalDamage = 0;
+
+// while (fighting) {	
+// 	if (totalDamage < 10) {	
+// 		characterAttack()
+// 	} else if (totalDamage > 10) {
+//       	youWon();
+//     } else {
+// 		youLost();
+// 	}	
+// } 
+
+// function youWon(){
+// 	console.log("KO! YOU WON");
+//   	fighting = false;
+// }
+
+// function youLost(){
+// 	console.log("YOU LOST");
+//     fighting = false;
+// }
+
 
 
 
@@ -62,6 +177,18 @@ import "./Attack"
 // }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 // class SaveBtn extends HTMLElement {
 
 //    constructor() {
@@ -101,5 +228,54 @@ import "./Attack"
 // console.log(document.querySelector('.characters'));
 // document.querySelector('.div').appendChild(myBtn);
 
+// var data;
+
+// var dataReadyEvent = document.createEvent("Event");
+// dataReadyEvent.initEvent("dataReady", true, false);
+
+// function DataObject() {
+//     this.name = "Data Object";
+//     this.data = function () {
+//         return data;
+//     }
+//     this.onDataCompleted = dataReadyHandler;
+//     document.addEventListener('dataReady', this.onDataCompleted.bind(this));
+//     // To see the result of not using bind, comment out the preceding line, 
+//     // and uncomment the following line of code.
+//     // document.addEventListener('dataReady', this.onDataCompleted);
+// }
+// function dataReadyHandler() {
+//     if (console && console.log) {
+//         console.log("Data object property value: " + this.name);
+//         console.log("Data object property value: " + this.data());
+//     }
+// }
+
+// var dataObj = new DataObject();
 
 
+// var button;
+
+// var clickEvent = document.createEvent("Event");
+// clickEvent.initEvent("click", true, false);
+
+// function DataObject() {
+//     this.name = "Data Object";
+//     this.data = function () {
+//         return data;
+//     }
+//     this.click = clickHandler;
+//     document.addEventListener('click', this.click.bind(this));
+//     // To see the result of not using bind, comment out the preceding line, 
+//     // and uncomment the following line of code.
+//     // document.addEventListener('click', this.dataObj);
+// }
+// function clickHandler() {
+//     if (console && console.log) {
+//         console.log("Data object property value: " + this.name);
+//         console.log("Data object property value: " + this.data());
+//     }
+// }
+
+// var dataObj = new DataObject();
+// console.log(dataObj)
