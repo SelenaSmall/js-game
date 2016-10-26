@@ -64,8 +64,7 @@ export default {
 
     resolve: {
         alias: {
-            'react':           path.resolve('./node_modules/react'),
-            'react-bootstrap': path.resolve('./node_modules/react-bootstrap')
+            'react':           path.resolve('./node_modules/react')
         },
         modulesDirectories: ['node_modules'],
         extensions:         ['', '.js', '.jsx','.json']
