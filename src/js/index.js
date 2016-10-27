@@ -5,11 +5,16 @@
 import"../scss/index.scss" 
 import Game from './Game'
 import Die from './Die'
-import Character from './Character'
+// import Character from './Character'
 import Attack from './Attack'
+import PlayerOne from './PlayerOne'
+import PlayerTwo from './PlayerTwo'
 
-let player1 = new Character(prompt("Choose your name: "))
-let player2 = new Character("Fred")
+// let player1 = new Character(prompt("Choose your name: "))
+// let player1 = new Character("Player 1")
+// let player2 = new Character("Computer")
+let player1 = new PlayerOne("Player1")
+let player2 = new PlayerTwo("Player2")
 
 console.log("Red Corner: " + player1.characterName() + " vs Blue Corner: " + player2.characterName())
 
@@ -18,7 +23,7 @@ newGame.startGame()
 
 
 // console.log(player1.characterName() + " Attack: " + player1.characterAttack())
-// console.log(player2.characterName() + " " + player2.characterDefend())
+// console.log(player2.characterName() + " " + player2.computerDefend())
 
 
 class Fight {
@@ -31,14 +36,19 @@ class Fight {
 	fighting() {
 		while(this.duel) {
 			if (this.totalDamage < 30) {	
-				console.log(player1.characterName() + " Attack: " + player1.characterAttack())
+				console.log(player1.characterName() + ": Attack: " + player1.characterAttack())
 				this.totalDamage += this.damageThisRound
 				
 				if (this.totalDamage < 30) { 
-					console.log(player2.characterName() + " " + player2.characterDefend())
-					console.log(player2.characterName() + " Attack: " + player2.characterAttack())
+					console.log(player2.characterName() + ": " + player2.playerTwoDefend())
+						
+						if (player2.playerTwoDefend() == "Counter" ) {
+							console.log(player2.characterName() + ": Attack: " + player2.characterAttack())
+						}
+
 					if (player2.characterAttack()) {
-						console.log(player1.characterName() + " " + player1.characterDefend())
+						console.log(player1.characterName() + ": " + player1.playerOneBlock())
+						this.totalDamage += this.damageThisRound
 					}
 				}
 

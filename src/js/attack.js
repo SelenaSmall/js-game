@@ -2,16 +2,13 @@ import Die from './Die'
 
 export default class Attack {
 	constructor() {
-		this.d20 = new Die(1, 20)
+		this.jab = new Die(1, 10)
 	}
 
-	attackScore() {
-		return this.d20.roll()
+	jabScore() {
+		return this.jab.roll()
 	}
 
-	defendScore() {
-		return this.d20.roll()
-	}
 }
 
 let jab = new Attack()
