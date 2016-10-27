@@ -3,6 +3,7 @@ import Attack from './Attack'
 export default class Character {
 	constructor() {
 		this.jab = new Attack()
+		//this.lifeValue
 	}
 
 	characterName() {

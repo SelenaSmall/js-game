@@ -16,4 +16,4 @@ export default class PlayerTwo extends Character {
 }
 
 // let player2 = new PlayerTwo("Player2")
-// console.log(player2)
+// console.log(player2.playerTwoDefend)
