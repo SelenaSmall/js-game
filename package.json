@@ -10,7 +10,9 @@
     "hot": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --devtool eval --progress --colors --hot  --config ./webpack-dev.config.babel.js"
   },
   "dependencies": {
-    
+    "normalize-css": "^2.3.1",
+    "font-awesome": "^4.7.0",
+    "event-abstract-class": "^1.0.6"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
