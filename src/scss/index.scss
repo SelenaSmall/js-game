@@ -3,7 +3,11 @@
  * Import your app's partial SCSS files in this file
  */
 
-@import 'partials/main'; 
-@import 'partials/character'; 
-@import 'partials/redCorner'; 
-@import 'partials/blueCorner'; 
+//@import 'partials/main';
+//@import 'partials/character';
+//@import 'partials/redCorner';
+//@import 'partials/blueCorner';
+@import 'base/elements';
+@import 'components/StatusBar';
+@import 'components/PlayerStatus';
+@import 'components/Status';

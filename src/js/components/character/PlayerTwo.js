@@ -1,13 +1,13 @@
-import Character from './Character'
-import Defend from '../Defend'
-import Attack from '../Attack'
+import BaseCharacter from './BaseCharacter'
+import Defend from '../actions/Defend'
+import Attack from '../actions/Attack'
 
 /**
  * PlayerTwo component
  *
  * Handles functionality for PlayerTwo (the computer generated user)
  */
-export default class PlayerTwo extends Character {
+export default class PlayerTwo extends BaseCharacter {
 	// region Constructor
 
     /**

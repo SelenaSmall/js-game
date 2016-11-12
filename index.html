@@ -6,84 +6,106 @@
     <meta charset="utf-8" />
 
     <link href="./dist/css/index.css" rel="stylesheet" media="all" />
-    <script src="./dist/js/index.js"></script>
+    <script src="./dist/js/index.js" defer></script>
   </head>
 
   <body>
-  	<h1>My Lame AF Game</h1>
+  <div id="app">
+    <section id="status" >
+      <section id="player-1-status" class="player-status">
+        <h1>Player 1</h1>
 
-    <div class="characters">
-      
-      <div class="col-grid-6" id="red-corner">
-        <div id="red-character">
-          <img class="red-body-parts" id="red-left-hand" src ="src/images/redLeftHand.png" />
-          <img class="red-body-parts" id="red-left-bicep" src ="src/images/redLeftBicep.png" />
-          <img class="red-body-parts" id="red-left-thigh" src ="src/images/redLeftThigh.png" />
-          <img class="red-body-parts" id="red-left-leg" src ="src/images/redLeftLeg.png" />
-          <img class="red-body-parts" id="red-body" src ="src/images/redBody.png" />
-          <img class="red-body-parts" id="red-head" src ="src/images/redHead.png" />
-          <img class="red-body-parts" id="red-right-bicep" src ="src/images/redRightBicep.png" />
-          <img class="red-body-parts" id="red-right-hand" src ="src/images/redRightHand.png" />
-          <img class="red-body-parts" id="red-right-thigh" src ="src/images/redRightThigh.png" />
-          <img class="red-body-parts" id="red-right-leg" src ="src/images/redRightLeg.png" />
-        </div>
-      </div>
-      
-      <div class="col-grid-6" id="blue-corner">
-        <div id="blue-character">
-          <img class="blue-body-parts" id="blue-right-hand" src ="src/images/blueRightHand.png" />
-          <img class="blue-body-parts" id="blue-right-bicep" src ="src/images/blueRightBicep.png" />        
-          <img class="blue-body-parts" id="blue-right-thigh" src ="src/images/blueRightThigh.png" />
-          <img class="blue-body-parts" id="blue-right-leg" src ="src/images/blueRightLeg.png" />
-          <img class="blue-body-parts" id="blue-body" src ="src/images/blueBody.png" />
-          <img class="blue-body-parts" id="blue-head" src ="src/images/blueHead.png" />
-          <img class="blue-body-parts" id="blue-left-bicep" src ="src/images/blueLeftBicep.png" />
-          <img class="blue-body-parts" id="blue-left-hand" src ="src/images/blueLeftHand.png" />       
-          <img class="blue-body-parts" id="blue-left-thigh" src ="src/images/blueLeftThigh.png" />
-          <img class="blue-body-parts" id="blue-left-leg" src ="src/images/blueLeftLeg.png" /> 
-        </div>
-      </div>
-    </div>
 
-    <div class="life-bar">
-      <div class="col-grid-6" id="life-bar-red">
-        <h2>Red Corner</h2>
-        <div id="red-life-bar"></div>
-      </div>
-      <div class="col-grid-6" id="life-bar-blue">
-        <h2>Blue Corner</h2>
-        <div id="blue-life-bar"></div>
-      </div>
-    </div>
+      </section> <!-- player-1-status -->
 
-    <div id="description">
-      <h3>Description</h3>
-      	One character on each side of the screen
-      	<br>Life bar at the bottom of the screen
-      	<br>Random calulator evaluates to each outcome
-      	<br>Use local storage to store a high score
-      	<br>Player vs Computer
-      	<br>>> Play Now
-      	<br>>> Starting in... ((Count-down Timer))
-      	<br>>> FIGHT
-        <br>
-      	<br>Player controls = jab, punch, hook, uppercut
-      	<br>Player combos = jump-punch, jab-hook, uppercut-hook-punch
-      	<br>Player reactions = get hit, block, slip-attach back, duck
-        <br>
-    	  <br>Computer controls = jab, punch, hook, uppercut
-    	  <br>Computer combos = jump-punch, jab-hook, uppercut-hook-punch
-      	<br>Computer reactions = get hit, block, slip-attach back, duck
-        <br>
-      	<br>Computer attacks at random intervals
-      	<br>Collision validator to ensure current move is completed before next move initiated
-        <br>
-      	<br>WINNER = Gloat/ Jump
-      	<br>LOSER = Blow up
-        <br>
-      	<br>>> You won/ Lost
-      	<br>>> Play again?
-    </div>
+      <section id="player-2-status" class="player-status">
+        <h1>Player 2</h1>
+
+
+      </section> <!-- player-2-status -->
+    </section> <!-- status -->
+
+  </div><!-- app -->
+
+
+
+
+
+
+  	<!--<h1>My Lame AF Game</h1>-->
+
+    <!--<div class="characters">-->
+      <!-- -->
+      <!--<div class="col-grid-6" id="red-corner">-->
+        <!--<div id="red-character">-->
+          <!--<img class="red-body-parts" id="red-left-hand" src ="src/images/redLeftHand.png" />-->
+          <!--<img class="red-body-parts" id="red-left-bicep" src ="src/images/redLeftBicep.png" />-->
+          <!--<img class="red-body-parts" id="red-left-thigh" src ="src/images/redLeftThigh.png" />-->
+          <!--<img class="red-body-parts" id="red-left-leg" src ="src/images/redLeftLeg.png" />-->
+          <!--<img class="red-body-parts" id="red-body" src ="src/images/redBody.png" />-->
+          <!--<img class="red-body-parts" id="red-head" src ="src/images/redHead.png" />-->
+          <!--<img class="red-body-parts" id="red-right-bicep" src ="src/images/redRightBicep.png" />-->
+          <!--<img class="red-body-parts" id="red-right-hand" src ="src/images/redRightHand.png" />-->
+          <!--<img class="red-body-parts" id="red-right-thigh" src ="src/images/redRightThigh.png" />-->
+          <!--<img class="red-body-parts" id="red-right-leg" src ="src/images/redRightLeg.png" />-->
+        <!--</div>-->
+      <!--</div>-->
+      <!-- -->
+      <!--<div class="col-grid-6" id="blue-corner">-->
+        <!--<div id="blue-character">-->
+          <!--<img class="blue-body-parts" id="blue-right-hand" src ="src/images/blueRightHand.png" />-->
+          <!--<img class="blue-body-parts" id="blue-right-bicep" src ="src/images/blueRightBicep.png" />        -->
+          <!--<img class="blue-body-parts" id="blue-right-thigh" src ="src/images/blueRightThigh.png" />-->
+          <!--<img class="blue-body-parts" id="blue-right-leg" src ="src/images/blueRightLeg.png" />-->
+          <!--<img class="blue-body-parts" id="blue-body" src ="src/images/blueBody.png" />-->
+          <!--<img class="blue-body-parts" id="blue-head" src ="src/images/blueHead.png" />-->
+          <!--<img class="blue-body-parts" id="blue-left-bicep" src ="src/images/blueLeftBicep.png" />-->
+          <!--<img class="blue-body-parts" id="blue-left-hand" src ="src/images/blueLeftHand.png" />       -->
+          <!--<img class="blue-body-parts" id="blue-left-thigh" src ="src/images/blueLeftThigh.png" />-->
+          <!--<img class="blue-body-parts" id="blue-left-leg" src ="src/images/blueLeftLeg.png" /> -->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="life-bar">-->
+      <!--<div class="col-grid-6" id="life-bar-red">-->
+        <!--<h2>Red Corner</h2>-->
+        <!--<div id="red-life-bar"></div>-->
+      <!--</div>-->
+      <!--<div class="col-grid-6" id="life-bar-blue">-->
+        <!--<h2>Blue Corner</h2>-->
+        <!--<div id="blue-life-bar"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div id="description">-->
+      <!--<h3>Description</h3>-->
+      	<!--One character on each side of the screen-->
+      	<!--<br>Life bar at the bottom of the screen-->
+      	<!--<br>Random calulator evaluates to each outcome-->
+      	<!--<br>Use local storage to store a high score-->
+      	<!--<br>Player vs Computer-->
+      	<!--<br>>> Play Now-->
+      	<!--<br>>> Starting in... ((Count-down Timer))-->
+      	<!--<br>>> FIGHT-->
+        <!--<br>-->
+      	<!--<br>Player controls = jab, punch, hook, uppercut-->
+      	<!--<br>Player combos = jump-punch, jab-hook, uppercut-hook-punch-->
+      	<!--<br>Player reactions = get hit, block, slip-attach back, duck-->
+        <!--<br>-->
+    	  <!--<br>Computer controls = jab, punch, hook, uppercut-->
+    	  <!--<br>Computer combos = jump-punch, jab-hook, uppercut-hook-punch-->
+      	<!--<br>Computer reactions = get hit, block, slip-attach back, duck-->
+        <!--<br>-->
+      	<!--<br>Computer attacks at random intervals-->
+      	<!--<br>Collision validator to ensure current move is completed before next move initiated-->
+        <!--<br>-->
+      	<!--<br>WINNER = Gloat/ Jump-->
+      	<!--<br>LOSER = Blow up-->
+        <!--<br>-->
+      	<!--<br>>> You won/ Lost-->
+      	<!--<br>>> Play again?-->
+    <!--</div>-->
 
   </body>
 </html>

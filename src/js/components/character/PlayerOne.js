@@ -1,6 +1,6 @@
-import Character from './Character'
-import Defend from '../Defend'
-import Attack from '../Attack'
+import BaseCharacter from './BaseCharacter'
+import Defend from '../actions/Defend'
+import Attack from '../actions/Attack'
 
 const OPTIONS = {
 }
@@ -10,7 +10,7 @@ const OPTIONS = {
  *
  * Handles functionality for PlayerOne (the end user)
  */
-export default class PlayerOne extends Character {
+export default class PlayerOne extends BaseCharacter {
 	// region Constructor
 
     /**

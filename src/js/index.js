@@ -9,6 +9,21 @@ window.app = new App()
 window.app.init()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 // import"../scss/index.scss" 
 // import Game from './Game'

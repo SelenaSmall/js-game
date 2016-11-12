@@ -1,0 +1,25 @@
+.player-status {
+  width: 50%;
+
+  .status-bar {
+    display: inline-block;
+  }
+}
+
+.life-bar {
+  width: 100%;
+
+  .status-bar-fill {
+    background: #292;
+  }
+}
+
+.energy-bar {
+  width: 30%;
+  font-size: 10px;
+  padding: 0 6px;
+
+  .status-bar-fill {
+    background: #77F;
+  }
+}
