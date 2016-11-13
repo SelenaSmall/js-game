@@ -3,11 +3,12 @@ import Die from '../mechanics/Die'
 import Attack from '../actions/Attack'
 
 export const STATES = {
-    KO:         0,
+    SETUP:      0,
     IDLE:       1,
     ATTACKING:  2,
     DEFENDING:  3,
-    WIN:        4
+    WIN:        4,
+    KO:         5
 }
 
 export const OPTIONS = {
@@ -33,7 +34,7 @@ export default class Character extends EventAbstractClass {
 
         this.name = name
 
-        this.state       = STATES.IDLE
+        this.state       = STATES.SETUP
         this.actionIndex = undefined
 
         this.d9  = new Die(9, 0)
@@ -41,20 +42,55 @@ export default class Character extends EventAbstractClass {
         this.life      = this.options.maxLife
         this.energy    = this.options.maxEnergy
 
-        this.strength  = this.d9.roll(3)
-        this.defense   = this.d9.roll(3)
-        this.agility  = this.d9.roll(3)
+        this.stats = {}
 
         this.attacks = [
             new Attack('Jab', 10, 10),
             new Attack('Punch', 15, 15),
             new Attack('Hook', 25, 25)
         ]
+
+        this.rollStats()
 	}
 
 	// endregion Constructor
 	
 	// region Controls
+
+    /**
+     * Set character property
+     *
+     * @param {String} key   Property name to set
+     * @param {*}      value Value to set
+     */
+    setProperty(key, value) {
+        this.trigger('setProperty:pre', {
+            key:    key,
+            value:  value
+        })
+
+        this[key] = value
+
+        this.trigger('setProperty:post', {
+            key:    key,
+            value:  value
+        })
+    }
+
+    /**
+     * Roll stats
+     */
+    rollStats() {
+        this.trigger('rollStats:pre')
+
+        this.setProperty('stats', {
+            strength: this.d9.roll(3),
+            defense: this.d9.roll(3),
+            agility: this.d9.roll(3)
+        })
+
+        this.trigger('rollStats:post')
+    }
 
     /**
      * Expend Energy
@@ -77,6 +113,10 @@ export default class Character extends EventAbstractClass {
         })
     }
 
+    /**
+     * Recover
+     * @param {Number} value Amount of energy to recover
+     */
     recover(value) {
         this.trigger('recover:pre', {
             value: value

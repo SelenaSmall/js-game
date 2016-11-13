@@ -30,8 +30,8 @@ export default class Attack {
 	 * @param {Character} target Target character
 	 */
 	perform (attacker, target) {
-		let damage 	= (this.base + attacker.strength + D20.roll()),
-			defense = (target.defense + D20.roll())
+		let damage 	= (this.base + attacker.stats.strength + D20.roll()),
+			defense = (target.stats.defense + D20.roll())
 
 		if (attacker.energy < this.cost) {
 			return 0
