@@ -2,15 +2,25 @@ import EventAbstractClass from 'event-abstract-class'
 import Die from './components/mechanics/Die'
 import Character, { STATES } from './components/character/Character'
 import StatusBar from './components/ui/StatusBar'
+import ActionMenu from './components/ui/ActionMenu'
 
 const OPTIONS = {
     player1StatusSelector: '#player-1-status',
     player2StatusSelector: '#player-2-status',
+    bottomRegionSelector: '#bottom-region',
 
     lifeBarClass: 'life-bar',
     energyBarClass: 'energy-bar',
 
     cycleDelay: 1000
+}
+
+export const PHASES = {
+    SETUP:   0,
+    SELECT:  1,
+    PERFORM: 2,
+    EFFECT:  3,
+    END:     4
 }
 
 const CHANCE = new Die(3),
@@ -36,9 +46,12 @@ export default class App extends EventAbstractClass {
 
         this.player1Status = document.querySelector(this.options.player1StatusSelector)
         this.player2Status = document.querySelector(this.options.player2StatusSelector)
+        this.bottomRegion = document.querySelector(this.options.bottomRegionSelector)
 
         this.player1 = new Character('Selena')
         this.player2 = new Character('Raice')
+
+        this.actionMenu = new ActionMenu(this.player1)
 
         this.player1.lifeBar = new StatusBar({
             maxValue: this.player1.options.maxLife
@@ -90,6 +103,21 @@ export default class App extends EventAbstractClass {
     }
 
     /**
+     * Handle character# event
+     *
+     * @param {Object}    args   Event arguments
+     */
+    handlePlayer1SetAction(args) {
+        switch(args.state) {
+            case STATES.ATTACKING:
+            case STATES.DEFENDING:
+                this.setActionsForPlayer(this.player2)
+                this.setPhase(PHASES.PERFORM)
+                break
+        }
+    }
+
+    /**
      * Handle Character#damage:pre event and Character#heal:pre event
      *
      * @param {Character} player Player receiving life change
@@ -97,14 +125,6 @@ export default class App extends EventAbstractClass {
      */
     handlePlayerLifeChange(player, args) {
         player.lifeBar.setValue(player.life)
-
-        if (args.value > 0) {
-            if (player.life > 0) {
-                console.log(`${player.name} has ${player.life} life remaining.`)
-            } else {
-                console.log(`${player.name} has been Knocked Out!`)
-            }
-        }
     }
 
     /**
@@ -153,7 +173,7 @@ export default class App extends EventAbstractClass {
             this.player1.performAction(this.player2)
 
             if (this.player2.life > 0) {
-                this.player2.performAction(this.player2)
+                this.player2.performAction(this.player1)
             }
         } else {
             this.player2.performAction(this.player1)
@@ -165,6 +185,15 @@ export default class App extends EventAbstractClass {
 
         this.player1.setAction((this.player1 > 0) ? STATES.IDLE : STATES.KO)
         this.player2.setAction((this.player2 > 0) ? STATES.IDLE : STATES.KO)
+
+        if (
+            (this.player1.life > 0) &&
+            (this.player2.life > 0)
+        ) {
+            this.setPhase(PHASES.SELECT)
+        } else {
+            this.setPhase(PHASES.END)
+        }
     }
 
     // endregion Lifecycle
@@ -180,6 +209,8 @@ export default class App extends EventAbstractClass {
 
         this.player2.lifeBar.init()
         this.player2.energyBar.init()
+
+        this.actionMenu.init()
     }
 
 
@@ -190,9 +221,12 @@ export default class App extends EventAbstractClass {
         this.initComponents()
         this.render()
         this.bind()
-        this.cycle()
+        this.setPhase(PHASES.SELECT)
     }
 
+    /**
+     * Render application
+     */
     render() {
         this.player1.lifeBar.container.classList.add(this.options.lifeBarClass)
         this.player1.energyBar.container.classList.add(this.options.energyBarClass)
@@ -220,11 +254,38 @@ export default class App extends EventAbstractClass {
         this.player1.on('damage:post heal:post', this.handlePlayerLifeChange.bind(this, this.player1))
         this.player2.on('damage:post heal:post', this.handlePlayerLifeChange.bind(this, this.player2))
 
-        this.player1.on('expend:post recovor:post', this.handlePlayerEnergyChange.bind(this, this.player1))
-        this.player2.on('expend:post recovor:post', this.handlePlayerEnergyChange.bind(this, this.player2))
+        this.player1.on('expend:post recover:post', this.handlePlayerEnergyChange.bind(this, this.player1))
+        this.player2.on('expend:post recover:post', this.handlePlayerEnergyChange.bind(this, this.player2))
+
+        this.player1.on('setAction:post', this.handlePlayer1SetAction.bind(this))
 
         this.player1.on('performAction:pre', this.handlePlayerPerformAction.bind(this, this.player1))
         this.player2.on('performAction:pre', this.handlePlayerPerformAction.bind(this, this.player2))
+    }
+
+    /**
+     * Set game state phases
+     *
+     * @param {Number} phase Game state phases
+     */
+    setPhase(phase) {
+        switch(phase) {
+            case PHASES.SELECT:
+                this.actionMenu.render()
+                this.bottomRegion.appendChild(this.actionMenu.container)
+                break
+
+            case PHASES.PERFORM:
+                this.bottomRegion.removeChild(this.actionMenu.container)
+                this.runPlayerActions()
+                break
+
+            case PHASES.EFFECT:
+                break
+
+            case PHASES.END:
+                break
+        }
     }
 
     /**

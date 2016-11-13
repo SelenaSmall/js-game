@@ -7,7 +7,13 @@
 //@import 'partials/character';
 //@import 'partials/redCorner';
 //@import 'partials/blueCorner';
-@import 'base/elements';
-@import 'components/StatusBar';
-@import 'components/PlayerStatus';
-@import 'components/Status';
+
+@import url("https://fonts.googleapis.com/css?family=Sarpanch:900");
+
+@import
+  'base/elements',
+  'components/status-bar',
+  'components/player-status',
+  'components/top-region',
+  'components/bottom-region',
+  'components/action-menu';

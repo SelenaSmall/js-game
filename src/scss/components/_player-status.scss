@@ -1,8 +1,14 @@
 .player-status {
   width: 50%;
 
+  h1 {
+    margin: 0;
+  }
+
   .status-bar {
     display: inline-block;
+    color: #FFF;
+    text-shadow: rgba(#000, 0.80) 1px 1px 0;
   }
 }
 

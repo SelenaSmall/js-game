@@ -142,8 +142,18 @@ export default class Character extends EventAbstractClass {
      * @param {Number} actionIndex Action index if action requires it
      */
     setAction(state, actionIndex = undefined) {
+        this.trigger('setAction:pre', {
+            state: state,
+            actionIndex: actionIndex
+        })
+
         this.state = state
         this.actionIndex = actionIndex
+
+        this.trigger('setAction:post', {
+            state: state,
+            actionIndex: actionIndex
+        })
     }
 
     /**
