@@ -61,7 +61,8 @@ export default class App extends EventAbstractClass {
         this.player1 = new Character('Player One')
         this.player2 = new Character('Computer')
 
-        this.playerSettings = new PlayerSettings(this.player1)
+        this.player1Settings = new PlayerSettings(this.player1, {titleText: 'Player One Settings'})
+        this.player2Settings = new PlayerSettings(this.player2, {titleText: 'CPU Opponent Settings'})
 
         this.player1Avatar = new Avatar(this.player1)
         this.player2Avatar = new Avatar(this.player2)
@@ -186,20 +187,22 @@ export default class App extends EventAbstractClass {
 
         this.updatePlayerStatus()
 
-        this.player2.rollStats()
-        this.player2.setProperty('state', STATES.IDLE)
+        //this.player2.rollStats()
+        //this.player2.setProperty('state', STATES.IDLE)
 
-        this.middleRegion.appendChild(this.playerSettings.container)
+        this.middleRegion.appendChild(this.player1Settings.container)
+        this.middleRegion.appendChild(this.player2Settings.container)
 
-        this.playerSettings.nameInput.focus()
+        this.player1Settings.nameInput.focus()
     }
 
     /**
      * Run select phase
      */
     runSelectPhase() {
-        if (this.playerSettings.container.parentNode) {
-            this.playerSettings.container.parentNode.removeChild(this.playerSettings.container)
+        if (this.player1Settings.container.parentNode) {
+            this.player1Settings.container.parentNode.removeChild(this.player1Settings.container)
+            this.player2Settings.container.parentNode.removeChild(this.player2Settings.container)
         }
 
         this.player1.setAction(STATES.IDLE)
@@ -315,7 +318,8 @@ export default class App extends EventAbstractClass {
      * Initialise components
      */
     initComponents() {
-        this.playerSettings.init()
+        this.player1Settings.init()
+        this.player2Settings.init()
 
         this.player1Status.init()
         this.player2Status.init()
