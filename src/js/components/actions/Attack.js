@@ -3,6 +3,9 @@ import { STATES } from '../character/Character'
 
 const D20 = new Die(20)
 
+/**
+ * Attack class component
+ */
 export default class Attack {
 	// region Constructor
 
@@ -50,8 +53,6 @@ export default class Attack {
 	}
 
 	// endregion Controls
-
-
 
 	///**
      //* Initialise component
@@ -112,5 +113,3 @@ export default class Attack {
 	//}
 
 }
-
-// let jab = new Attack()

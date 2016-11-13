@@ -90,6 +90,9 @@ export default class PlayerSettings extends EventAbstractClass {
 
     /**
      * Initialise component
+     *
+     * @fires PlayerSettings#init:pre
+     * @fires PlayerSettings#init:post
      */
     init() {
         this.trigger('init:pre')
@@ -102,6 +105,9 @@ export default class PlayerSettings extends EventAbstractClass {
 
     /**
      * Bind functionality to events
+     *
+     * @fires PlayerSettings#bind:pre
+     * @fires PlayerSettings#bind:post
      */
     bind() {
         this.trigger('bind:pre')
@@ -116,6 +122,9 @@ export default class PlayerSettings extends EventAbstractClass {
 
     /**
      * Render component
+     *
+     * @fires PlayerSettings#render:pre
+     * @fires PlayerSettings#render:post
      */
     render() {
         this.trigger('render:pre')

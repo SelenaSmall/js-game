@@ -8,6 +8,9 @@ const OPTIONS = {
 
 }
 
+/**
+ * Player Status class component
+ */
 export default class PlayerStatus extends EventAbstractClass {
     // region Construct
 
@@ -39,6 +42,11 @@ export default class PlayerStatus extends EventAbstractClass {
 
     // region Event handlers
 
+    /**
+     * Handle Character#setProperty:post event
+     *
+     * @param {Object} args   Event arguments
+     */
     handleCharacterSetProperty(args) {
         if (args.key === 'name') {
             this.name.innerHTML = args.value
@@ -48,7 +56,7 @@ export default class PlayerStatus extends EventAbstractClass {
     /**
      * Handle Character#damage:pre event and Character#heal:pre event
      *
-     * @param {Object}    args   Event arguments
+     * @param {Object} args   Event arguments
      */
     handlePlayerLifeChange(args) {
         this.lifeBar.setValue(this.character.life)
@@ -69,6 +77,9 @@ export default class PlayerStatus extends EventAbstractClass {
 
     /**
      * Initialise component
+     *
+     * @fires PlayerStatus#init:pre
+     * @fires PlayerStatus#init:post
      */
     init() {
         this.trigger('init:pre')
@@ -84,6 +95,9 @@ export default class PlayerStatus extends EventAbstractClass {
 
     /**
      * Bind functionality to events
+     *
+     * @fires PlayerStatus#bind:pre
+     * @fires PlayerStatus#bind:post
      */
     bind() {
         this.trigger('bind:pre')
@@ -97,8 +111,13 @@ export default class PlayerStatus extends EventAbstractClass {
 
     /**
      * Render component
+     *
+     * @fires PlayerStatus#render:pre
+     * @fires PlayerStatus#render:post
      */
     render() {
+        this.trigger('render:pre')
+
         this.name.innerHTML = this.character.name
 
         this.container.className = this.options.containerClass
@@ -114,6 +133,7 @@ export default class PlayerStatus extends EventAbstractClass {
         this.container.appendChild(this.lifeBar.container)
         this.container.appendChild(this.energyBar.container)
 
+        this.trigger('render:post')
     }
 
     // endregion Controls

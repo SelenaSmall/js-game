@@ -1,3 +1,6 @@
+/**
+ * Die class component
+ */
 export default class Die {
     // region Constructor
 

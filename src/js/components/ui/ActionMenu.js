@@ -36,7 +36,7 @@ export default class ActionMenu extends EventAbstractClass {
 
     // endregion Constructor
 
-    // reigon Event handlers
+    // region Event handlers
 
     /**
      * Handle attack item element click event
@@ -63,6 +63,9 @@ export default class ActionMenu extends EventAbstractClass {
 
     /**
      * Initialise component
+     *
+     * @fires ActionMenu#init:pre
+     * @fires ActionMenu#init:post
      */
     init() {
         this.trigger('init:pre')
@@ -74,6 +77,9 @@ export default class ActionMenu extends EventAbstractClass {
 
     /**
      * Render component
+     *
+     * @fires ActionMenu#render:pre
+     * @fires ActionMenu#render:post
      */
     render() {
         let defendItem = document.createElement('li')

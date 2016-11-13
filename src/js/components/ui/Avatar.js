@@ -25,9 +25,17 @@ const OPTIONS = {
     koClass:     'avatar-ko'
 }
 
+/**
+ * Avatr class component
+ */
 export default class Avatar extends EventAbstractClass {
     // region Constructor
 
+    /**
+     * Constructor
+     * @param {Character} character Character avatar
+     * {Object} options Applicaiton options
+     */
     constructor(character, options = {}) {
         super()
 
@@ -43,17 +51,24 @@ export default class Avatar extends EventAbstractClass {
 
     // region Event handlers
 
+    /**
+     * Handle character actions
+     *
+     * @param {Number} args State to be updated
+     */
     handleCharacterPerformAction(args) {
         this.updateState()
     }
 
     // endregion Event handlers
 
-
     // region Controls
 
     /**
      * Initialise component
+     *
+     * @fires Avatar#init:pre
+     * @fires Avatar#init:post
      */
     init() {
         this.trigger('init:pre')
@@ -66,6 +81,9 @@ export default class Avatar extends EventAbstractClass {
 
     /**
      * Bind component event classes
+     *
+     * @fires Avatar#bind:pre
+     * @fires Avatar#bind:post
      */
     bind() {
         this.trigger('bind:pre')
@@ -77,6 +95,9 @@ export default class Avatar extends EventAbstractClass {
 
     /**
      * Render component
+     *
+     * @fires Avatar#render:pre
+     * @fires Avatar#render:post
      */
     render() {
         this.trigger('render:pre')
@@ -122,6 +143,9 @@ export default class Avatar extends EventAbstractClass {
         this.trigger('render:post')
     }
 
+    /**
+     * Update avatar state
+     */
     updateState() {
         let action,
             state = AVATAR_STATES.idle

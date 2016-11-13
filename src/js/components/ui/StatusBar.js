@@ -55,6 +55,9 @@ export default class StatusBar extends EventAbstractClass {
 
     /**
      * Initialise component
+     *
+     * @fires StatusBar#init:pre
+     * @fires StatusBar#init:post
      */
     init() {
         this.trigger('init:pre')
@@ -68,6 +71,9 @@ export default class StatusBar extends EventAbstractClass {
 
     /**
      * Bind functionality to events
+     *
+     * @fires StatusBar#bind:pre
+     * @fires StatusBar#bind:post
      */
     bind() {
         this.trigger('bind:pre')
@@ -79,6 +85,9 @@ export default class StatusBar extends EventAbstractClass {
 
     /**
      * Render component
+     *
+     * @fires StatusBar#render:pre
+     * @fires StatusBar#render:post
      */
     render() {
         this.trigger('render:pre')
@@ -99,6 +108,8 @@ export default class StatusBar extends EventAbstractClass {
      * Set value
      *
      * @param {Number} value New value to set
+     * @fires StatusBar#setValue:pre
+     * @fires StatusBar#setValue:post
      */
     setValue(value) {
         let percent,
@@ -137,6 +148,8 @@ export default class StatusBar extends EventAbstractClass {
      * Toggle percetentage/stats toggleDisplay
      *
      * @param {Boolean} isPercentage new display state to set
+     * @fires StatusBar#toggleDisplay:pre
+     * @fires StatusBar#toggleDisplay:post
      */
     toggleDisplay (isPercentage) {
         if (isPercentage === undefined) {

@@ -20,6 +20,9 @@ export const OPTIONS = {
 
 }
 
+/**
+ * Character class component
+ */
 export default class Character extends EventAbstractClass {
  	// region Constructor
 

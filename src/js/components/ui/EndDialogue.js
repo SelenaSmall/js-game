@@ -48,12 +48,15 @@ export default class EndDialogue extends EventAbstractClass {
         this.loser.setProperty('state', STATES.SETUP)
     }
 
-    // region Event handlers
+    // endregion Event handlers
 
     // region Controls
 
     /**
      * Initialise component
+     *
+     * @fires EndDialogue#init:pre
+     * @fires EndDialogue#init:post
      */
     init() {
         this.trigger('init:pre')
@@ -66,6 +69,9 @@ export default class EndDialogue extends EventAbstractClass {
 
     /**
      * Bind functionality to events
+     *
+     * @fires EndDialogue#bind:pre
+     * @fires EndDialogue#bind:post
      */
     bind() {
         this.trigger('bind:pre')
@@ -77,6 +83,9 @@ export default class EndDialogue extends EventAbstractClass {
 
     /**
      * Render component
+     *
+     * @fires EndDialogue#render:pre
+     * @fires EndDialogue#render:post
      */
     render() {
         this.trigger('render:pre')
