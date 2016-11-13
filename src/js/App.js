@@ -3,7 +3,9 @@ import Die from './components/mechanics/Die'
 import Character, { STATES } from './components/character/Character'
 import PlayerSettings from './components/ui/PlayerSettings'
 import PlayerStatus from './components/ui/PlayerStatus'
+import Avatar from './components/ui/Avatar'
 import ActionMenu from './components/ui/ActionMenu'
+import EndDialogue from './components/ui/EndDialogue'
 
 const OPTIONS = {
     containerSelector:     '#app',
@@ -15,8 +17,10 @@ const OPTIONS = {
 
     player1StatusId:       'player-1-status',
     player2StatusId:       'player-2-status',
+    player1AvatarId:       'player-1-avatar',
+    player2AvatarId:       'player-2-avatar',
 
-    phaseDelay: 200
+    phaseDelay: 1000
 }
 
 export const PHASES = {
@@ -28,7 +32,7 @@ export const PHASES = {
 }
 
 const CHANCE = new Die(3),
-    D20 = new Die(20)
+      D20    = new Die(20)
 
 /**
  * Application root class
@@ -49,7 +53,7 @@ export default class App extends EventAbstractClass {
         this.phase        = PHASES.SETUP
         this.phaseTimeout = undefined
 
-        this.container = document.querySelector(this.options.containerSelector)
+        this.container     = document.querySelector(this.options.containerSelector)
         this.topRegion     = document.querySelector(this.options.topRegionSelector)
         this.middleRegion  = document.querySelector(this.options.middleRegionSelector)
         this.bottomRegion  = document.querySelector(this.options.bottomRegionSelector)
@@ -59,10 +63,15 @@ export default class App extends EventAbstractClass {
 
         this.playerSettings = new PlayerSettings(this.player1)
 
-        this.actionMenu = new ActionMenu(this.player1)
+        this.player1Avatar = new Avatar(this.player1)
+        this.player2Avatar = new Avatar(this.player2)
 
         this.player1Status = new PlayerStatus(this.player1)
         this.player2Status = new PlayerStatus(this.player2)
+
+        this.actionMenu = new ActionMenu(this.player1)
+
+        this.endDialogue   = undefined
 
     }
 
@@ -86,7 +95,7 @@ export default class App extends EventAbstractClass {
     // region Event handlers
 
     /**
-     * Handle Character#setProperty:pre
+     * Handle Character#setProperty:post
      *
      * @param {Character} player Player performing the action
      * @param {Object}    args   Event arguments
@@ -101,32 +110,14 @@ export default class App extends EventAbstractClass {
                     this.setPhase(PHASES.SELECT)
                 }
                 break
-        }
-    }
 
-    /**
-     * Handle Character#performAction:pre event
-     *
-     * @param {Character} player Player performing the action
-     * @param {Object}    args   Event arguments
-     */
-    handlePlayerPerformAction(player, args) {
-        let action
-
-        switch(player.state) {
-            case STATES.ATTACKING:
-                action = player.attacks[player.actionIndex]
-
-                if (player.energy >= action.cost) {
-                    console.log(`${player.name} attacks ${args.target.name} with a ${action.name}.`)
-                } else {
-                    console.log(`${player.name} doesn't have the energy to attack with a ${action.name} and recoveres for ${player.options.energyRecoveryIncrement} energy.`)
+            case PHASES.END:
+                if (
+                    (this.player1.state === STATES.SETUP) &&
+                    (this.player2.state === STATES.SETUP)
+                ) {
+                    this.setPhase(PHASES.SETUP)
                 }
-                break
-
-            default:
-            case STATES.DEFENDING:
-                console.log(`${player.name} defends and recovers for ${player.options.energyRecoveryIncrement} energy.`)
                 break
         }
     }
@@ -167,12 +158,25 @@ export default class App extends EventAbstractClass {
      * Run setup phase
      */
     runSetupPhase() {
-        if (this.player1Status.container.parentNode) {
-            this.topRegion.removeChild(this.player1Status.container)
-            this.topRegion.removeChild(this.player2Status.container)
+        if (
+            this.endDialogue &&
+            this.endDialogue.container.parentNode
+        ) {
+            this.endDialogue.container.parentNode.removeChild(this.endDialogue.container)
         }
 
-        this.player1.setProperty('state', STATES.SETUP)
+        if (this.player1Status.container.parentNode) {
+            this.player1Status.container.parentNode.removeChild(this.player1Status.container)
+            this.player2Status.container.parentNode.removeChild(this.player2Status.container)
+        }
+
+        if (this.player1Avatar.container.parentNode) {
+            this.player1Avatar.container.parentNode.removeChild(this.player1Avatar.container)
+            this.player2Avatar.container.parentNode.removeChild(this.player2Avatar.container)
+        }
+
+        this.player1.actionLog = []
+        this.player2.actionLog = []
 
         this.player1.heal(this.player1.options.maxLife)
         this.player1.recover(this.player1.options.maxEnergy)
@@ -198,8 +202,17 @@ export default class App extends EventAbstractClass {
             this.playerSettings.container.parentNode.removeChild(this.playerSettings.container)
         }
 
+        this.player1.setAction(STATES.IDLE)
+        this.player2.setAction(STATES.IDLE)
+
+        this.player1Avatar.updateState()
+        this.player2Avatar.updateState()
+
         this.topRegion.appendChild(this.player1Status.container)
         this.topRegion.appendChild(this.player2Status.container)
+
+        this.middleRegion.appendChild(this.player1Avatar.container)
+        this.middleRegion.appendChild(this.player2Avatar.container)
 
         this.actionMenu.render()
         this.bottomRegion.appendChild(this.actionMenu.container)
@@ -209,6 +222,9 @@ export default class App extends EventAbstractClass {
      * Run perform phase
      */
     runPerformPhase() {
+        let previousPlayer1Life = this.player1.life,
+            previousPlayer2Life = this.player2.life
+
         this.bottomRegion.removeChild(this.actionMenu.container)
 
         if (
@@ -228,8 +244,8 @@ export default class App extends EventAbstractClass {
             }
         }
 
-        this.player1.setAction((this.player1 > 0) ? STATES.IDLE : STATES.KO)
-        this.player2.setAction((this.player2 > 0) ? STATES.IDLE : STATES.KO)
+        this.player1.setAction((this.player1.life < previousPlayer1Life) ? STATES.HIT : STATES.IDLE)
+        this.player2.setAction((this.player2.life < previousPlayer2Life) ? STATES.HIT : STATES.IDLE)
 
         this.phaseTimeout = window.setTimeout(
             () => this.setPhase(PHASES.EFFECT),
@@ -250,6 +266,8 @@ export default class App extends EventAbstractClass {
             nextPhase = PHASES.END
         }
 
+        this.player1Avatar.updateState()
+        this.player2Avatar.updateState()
         this.updatePlayerStatus()
 
         this.phaseTimeout = window.setTimeout(
@@ -262,6 +280,30 @@ export default class App extends EventAbstractClass {
      * Run end phase
      */
     runEndPhase() {
+        let winner,
+            loser
+
+        if (this.player1.life > 0) {
+            winner = this.player1
+            loser = this.player2
+
+            this.player1.setAction(STATES.WIN)
+            this.player2.setAction(STATES.KO)
+        } else {
+            loser = this.player1
+            winner = this.player2
+
+            this.player1.setAction(STATES.KO)
+            this.player2.setAction(STATES.WIN)
+        }
+
+        this.player1Avatar.updateState()
+        this.player2Avatar.updateState()
+
+        this.endDialogue = new EndDialogue(winner, loser)
+        this.endDialogue.init()
+
+        this.middleRegion.appendChild(this.endDialogue.container)
 
     }
 
@@ -277,6 +319,9 @@ export default class App extends EventAbstractClass {
 
         this.player1Status.init()
         this.player2Status.init()
+
+        this.player1Avatar.init()
+        this.player2Avatar.init()
 
         this.actionMenu.init()
     }
@@ -297,6 +342,10 @@ export default class App extends EventAbstractClass {
     render() {
         this.player1Status.container.id = this.options.player1StatusId
         this.player2Status.container.id = this.options.player2StatusId
+
+        this.player1Avatar.container.id = this.options.player1AvatarId
+        this.player2Avatar.container.id = this.options.player2AvatarId
+
     }
 
     /**
@@ -307,9 +356,6 @@ export default class App extends EventAbstractClass {
         this.player2.on('setProperty:post', this.handlePlayerSetProperty.bind(this, this.player2))
 
         this.player1.on('setAction:post', this.handlePlayer1SetAction.bind(this))
-
-        this.player1.on('performAction:pre', this.handlePlayerPerformAction.bind(this, this.player1))
-        this.player2.on('performAction:pre', this.handlePlayerPerformAction.bind(this, this.player2))
     }
 
     /**
@@ -322,7 +368,9 @@ export default class App extends EventAbstractClass {
             window.clearTimeout(this.phaseTimeout)
         }
 
-        switch(phase) {
+        this.phase = phase
+
+        switch(this.phase) {
             case PHASES.SETUP:
                 this.runSetupPhase()
                 break
@@ -344,7 +392,6 @@ export default class App extends EventAbstractClass {
                 break
         }
 
-        this.phase = phase
     }
 
     // endregion Controls

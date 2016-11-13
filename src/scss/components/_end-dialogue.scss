@@ -1,0 +1,39 @@
+#end-dialogue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  padding: 10px;
+  border: #000 1px solid;
+  border-radius: 3px;
+  background: rgba(#000, 0.50);
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 5;
+
+  h2 { margin: 0; }
+
+  p {
+    color: #FFF;
+    text-shadow: rgba(#000, 0.80) 1px 1px 0;
+    margin: 10px 0;
+  }
+
+  button {
+    display: block;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0 auto;
+    padding: 4px 10px;
+    width: 150px;
+    border: #000 1px solid;
+    border-radius: 3px;
+    background: rgba(#FFF, 0.20);
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(#000, 0.20);
+    }
+  }
+}

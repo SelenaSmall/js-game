@@ -1,0 +1,67 @@
+.avatar {
+  width: 640px;
+  height: 480px;
+  background: transparent 0 0 no-repeat;
+
+  &.avatar-win {
+    z-index: 1;
+  }
+
+  &.avatar-ko {
+    z-index: 0;
+  }
+
+  &#player-1-avatar {
+    &.avatar-idle {
+      background-image: url(../images/red-character-states-png/red-stand-neutral.png);
+    }
+    &.avatar-jab {
+      background-image: url(../images/red-character-states-png/red-jab-face.png);
+    }
+    &.avatar-punch {
+      background-image: url(../images/red-character-states-png/red-punch-face.png);
+    }
+    &.avatar-hook {
+      background-image: url(../images/red-character-states-png/red-hook-left.png);
+    }
+    &.avatar-defend {
+      background-image: url(../images/red-character-states-png/red-block-face.png);
+    }
+    &.avatar-hit {
+      background-image: url(../images/red-character-states-png/red-get-hit-face.png);
+    }
+    &.avatar-win {
+      background-image: url(../images/red-character-states-png/red-win.png);
+    }
+    &.avatar-ko {
+      background-image: url(../images/red-character-states-png/red-die.png);
+    }
+  }
+
+  &#player-2-avatar {
+    &.avatar-idle {
+      background-image: url(../images/blue-character-states-png/blue-stand-neutral.png);
+    }
+    &.avatar-jab {
+      background-image: url(../images/blue-character-states-png/blue-jab-face.png);
+    }
+    &.avatar-punch {
+      background-image: url(../images/blue-character-states-png/blue-punch-face.png);
+    }
+    &.avatar-hook {
+      background-image: url(../images/blue-character-states-png/blue-hook-left.png);
+    }
+    &.avatar-defend {
+      background-image: url(../images/blue-character-states-png/blue-block-face.png);
+    }
+    &.avatar-hit {
+      background-image: url(../images/blue-character-states-png/blue-get-hit-face.png);
+    }
+    &.avatar-win {
+      background-image: url(../images/blue-character-states-png/blue-win.png);
+    }
+    &.avatar-ko {
+      background-image: url(../images/blue-character-states-png/blue-die.png);
+    }
+  }
+}

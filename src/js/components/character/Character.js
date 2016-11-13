@@ -1,14 +1,16 @@
 import EventAbstractClass from 'event-abstract-class'
 import Die from '../mechanics/Die'
 import Attack from '../actions/Attack'
+import { AVATAR_STATES } from '../ui/Avatar'
 
 export const STATES = {
     SETUP:      0,
     IDLE:       1,
     ATTACKING:  2,
     DEFENDING:  3,
-    WIN:        4,
-    KO:         5
+    HIT:        4,
+    WIN:        5,
+    KO:         6
 }
 
 export const OPTIONS = {
@@ -45,15 +47,59 @@ export default class Character extends EventAbstractClass {
         this.stats = {}
 
         this.attacks = [
-            new Attack('Jab', 10, 10),
-            new Attack('Punch', 15, 15),
-            new Attack('Hook', 25, 25)
+            new Attack(AVATAR_STATES.JAB, 'Jab', 10, 10),
+            new Attack(AVATAR_STATES.PUNCH, 'Punch', 15, 15),
+            new Attack(AVATAR_STATES.HOOK, 'Hook', 25, 25)
         ]
+
+        this.actionLog = []
 
         this.rollStats()
 	}
 
 	// endregion Constructor
+
+    // region Helpers
+
+    /**
+     * Add action log entry
+     *
+     * @param {Character}        target                 Character targeted
+     * @param {Number}           state                  Character state
+     * @param {Attack|undefined} action                 Action object instance
+     * @param {Number|undefined} value                  Action result value
+     * @param {Number}           life                   Life after action has been performed
+     * @param {Number}           energy                 Energy after action has been performed
+     * @param {Number}           previousLife           Life before action had been performed
+     * @param {Number}           previousEnergy         Energy before action had been performed
+     * @param {Number}           targetLife             Target's life after action had been performed
+     * @param {Number}           targetEnergy           Target's energy after action had been performed
+     * @param {Number}           previousTargetLife     Target's life before action had been performed
+     * @param {Number}           previousTargetEnergy   Target's energy before action had been performed
+     */
+    addLogEntry(target, state, action, value, life, energy, previousLife, previousEnergy, targetLife, targetEnergy, previousTargetLife, previousTargetEnergy) {
+        this.trigger('addLogEntry:pre')
+
+        this.actionLog.push({
+            target,
+            state,
+            action,
+            value,
+            life,
+            energy,
+            previousLife,
+            previousEnergy,
+            targetLife,
+            targetEnergy,
+            previousTargetLife,
+            previousTargetEnergy
+
+        })
+
+        this.trigger('addLogEntry:post')
+    }
+
+    // endregion Helpers
 	
 	// region Controls
 
@@ -203,11 +249,20 @@ export default class Character extends EventAbstractClass {
      */
     performAction(target) {
         let action,
-            value
+            value,
+            previousTargetLife,
+            previousTargetEnergy,
+            previousLife   = this.life,
+            previousEnergy = this.energy
 
         this.trigger('performAction:pre', {
             target: target
         })
+
+        if (target) {
+            previousTargetLife = target.life
+            previousTargetEnergy = target.energy
+        }
 
         switch(this.state) {
             case STATES.ATTACKING:
@@ -225,6 +280,21 @@ export default class Character extends EventAbstractClass {
                 this.recover(this.options.energyRecoveryIncrement)
                 break
         }
+
+        this.addLogEntry(
+            target,
+            this.state,
+            action,
+            value,
+            this.life,
+            this.energy,
+            previousLife,
+            previousEnergy,
+            target.life || undefined,
+            target.energy || undefined,
+            previousTargetLife,
+            previousTargetEnergy
+        )
 
         this.trigger('performAction:post', {
             target: target,

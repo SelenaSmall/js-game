@@ -9,11 +9,13 @@ export default class Attack {
     /**
      * Constructor
 	 *
+	 * @param {Number} id   Unique attack ID
 	 * @param {string} name Attack name
 	 * @param {Number} base Attack value
 	 * @param {Number} cost Energy cost
      */
-	constructor(name, base, cost) {
+	constructor(id, name, base, cost) {
+		this.id   = id
 		this.name = name
 		this.base = base
 		this.cost = cost
