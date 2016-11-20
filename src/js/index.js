@@ -1,6 +1,6 @@
 /**
- * Your overall app entry point
- * Initialise your modules in this file
+ * Overall app entry point
+ * Initialise all modules
  */
 import '../scss/index.scss'
 import App from './App'
@@ -8,23 +8,6 @@ import App from './App'
 window.app = new App()
 window.app.init()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
 // import"../scss/index.scss" 
 // import Game from './Game'
 // import Die from './Die'
