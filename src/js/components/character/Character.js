@@ -52,7 +52,7 @@ export default class Character extends EventAbstractClass {
         this.attacks = [
             new Attack(AVATAR_STATES.JAB, 'Jab', 10, 10),
             new Attack(AVATAR_STATES.PUNCH, 'Punch', 15, 15),
-            new Attack(AVATAR_STATES.HOOK, 'Hook', 25, 25)
+            new Attack(AVATAR_STATES.UPPERCUT, 'Uppercut', 25, 25)
         ]
 
         this.actionLog = []

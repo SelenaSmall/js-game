@@ -2,14 +2,14 @@ import EventAbstractClass from 'event-abstract-class'
 import { STATES } from '../character/Character'
 
 export const AVATAR_STATES = {
-    IDLE:   0,
-    JAB:    1,
-    PUNCH:  2,
-    HOOK:   3,
-    DEFEND: 4,
-    HIT:    5,
-    WIN:    6,
-    KO:     7
+    IDLE:       0,
+    JAB:        1,
+    PUNCH:      2,
+    UPPERCUT:   3,
+    DEFEND:     4,
+    HIT:        5,
+    WIN:        6,
+    KO:         7
 }
 
 const OPTIONS = {
@@ -18,7 +18,7 @@ const OPTIONS = {
     idleClass:  'avatar-idle',
     jabClass:    'avatar-jab',
     punchClass:  'avatar-punch',
-    hookClass:   'avatar-hook',
+    uppercutClass:   'avatar-uppercut',
     defendClass: 'avatar-defend',
     hitClass:    'avatar-hit',
     winClass:    'avatar-win',
@@ -118,8 +118,8 @@ export default class Avatar extends EventAbstractClass {
                 this.container.classList.add(this.options.punchClass)
                 break
 
-            case AVATAR_STATES.HOOK:
-                this.container.classList.add(this.options.hookClass)
+            case AVATAR_STATES.UPPERCUT:
+                this.container.classList.add(this.options.uppercutClass)
                 break
 
             case AVATAR_STATES.DEFEND:

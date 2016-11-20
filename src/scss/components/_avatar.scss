@@ -1,6 +1,6 @@
 .avatar {
-  width: 640px;
-  height: 480px;
+  width: 800px;
+  height: 600px;
   background: transparent 0 0 no-repeat;
 
   &.avatar-win {
@@ -13,55 +13,56 @@
 
   &#player-1-avatar {
     &.avatar-idle {
-      background-image: url(../images/red-character-states-png/red-stand-neutral.png);
+      background-image: url(../images/red-avatar-states/red-neutral.png);
     }
     &.avatar-jab {
-      background-image: url(../images/red-character-states-png/red-jab-face.png);
+      background-image: url(../images/red-avatar-states/red-jab.png);
     }
     &.avatar-punch {
-      background-image: url(../images/red-character-states-png/red-punch-face.png);
+      background-image: url(../images/red-avatar-states/red-punch.png);
+      z-index: 1;
     }
-    &.avatar-hook {
-      background-image: url(../images/red-character-states-png/red-hook-left.png);
+    &.avatar-uppercut {
+      background-image: url(../images/red-avatar-states/red-uppercut.png);
     }
     &.avatar-defend {
-      background-image: url(../images/red-character-states-png/red-block-face.png);
+      background-image: url(../images/red-avatar-states/red-block.png);
     }
     &.avatar-hit {
-      background-image: url(../images/red-character-states-png/red-get-hit-face.png);
+      background-image: url(../images/red-avatar-states/red-get-hit.png);
     }
     &.avatar-win {
-      background-image: url(../images/red-character-states-png/red-win.png);
+      background-image: url(../images/red-avatar-states/red-win.png);
     }
     &.avatar-ko {
-      background-image: url(../images/red-character-states-png/red-die.png);
+      background-image: url(../images/red-avatar-states/red-die.png);
     }
   }
 
   &#player-2-avatar {
     &.avatar-idle {
-      background-image: url(../images/blue-character-states-png/blue-stand-neutral.png);
+      background-image: url(../images/blue-avatar-states/blue-neutral.png);
     }
     &.avatar-jab {
-      background-image: url(../images/blue-character-states-png/blue-jab-face.png);
+      background-image: url(../images/blue-avatar-states/blue-jab.png);
     }
     &.avatar-punch {
-      background-image: url(../images/blue-character-states-png/blue-punch-face.png);
+      background-image: url(../images/blue-avatar-states/blue-punch.png);
     }
-    &.avatar-hook {
-      background-image: url(../images/blue-character-states-png/blue-hook-left.png);
+    &.avatar-uppercut {
+      background-image: url(../images/blue-avatar-states/blue-uppercut.png);
     }
     &.avatar-defend {
-      background-image: url(../images/blue-character-states-png/blue-block-face.png);
+      background-image: url(../images/blue-avatar-states/blue-block.png);
     }
     &.avatar-hit {
-      background-image: url(../images/blue-character-states-png/blue-get-hit-face.png);
+      background-image: url(../images/blue-avatar-states/blue-get-hit.png);
     }
     &.avatar-win {
-      background-image: url(../images/blue-character-states-png/blue-win.png);
+      background-image: url(../images/blue-avatar-states/blue-win.png);
     }
     &.avatar-ko {
-      background-image: url(../images/blue-character-states-png/blue-die.png);
+      background-image: url(../images/blue-avatar-states/blue-die.png);
     }
   }
 }

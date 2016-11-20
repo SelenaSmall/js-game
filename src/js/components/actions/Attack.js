@@ -96,7 +96,7 @@ export default class Attack {
 	//			return "Upper Cut"
 	//			break
 	//		case 3:
-	//			return "Hook"
+	//			return "Uppercut"
 	//			break
 	//		case 4:
 	//			return "Two hit combo"
