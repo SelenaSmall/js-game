@@ -118,7 +118,7 @@ export default {
             },{
                 test:   /\.(gif|png|jpg|jpeg|svg)(\?v=\d+\.\d+\.\d+)?$/,
                 loaders: [
-                    'file?hash=sha512&digest=hex&name=img/[name].[ext]',
+                    '/file?hash=sha512&digest=hex&name=img/[name].[ext]',
                     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ]
             },{
