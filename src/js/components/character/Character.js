@@ -306,7 +306,7 @@ export default class Character extends EventAbstractClass {
         })
     }
 
-    // endregion COntrols
+    // endregion Controls
 
 }
  
